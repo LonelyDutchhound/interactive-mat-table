@@ -72,7 +72,9 @@ export class GoodsTableContainerComponent implements OnInit, OnDestroy {
     if (this.goodsList) {
       const subscription = this.cartService.selectedGoods$.pipe(
         map(selectedItems => {
-          this.goodsList = this.goodsList.filter(good => selectedItems.indexOf(good) === -1);
+          const objIdsOfSelected = new Set(selectedItems.map(item => item.id));
+          this.goodsList = this.goodsList.filter(good => !objIdsOfSelected.has(good.id));
+          console.log(objIdsOfSelected, this.goodsList);
         })
       ).subscribe();
       subscription.unsubscribe();
