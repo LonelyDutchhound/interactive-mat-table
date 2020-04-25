@@ -1,0 +1,32 @@
+<mat-card class="table">
+
+    <div class="indicator__ancor">
+        <div *ngIf="(isLoading$ | async) && ((isError$ | async) === false); else errorIndicator" class="indicator__container">
+            <mat-progress-bar mode="indeterminate" [value]="50"></mat-progress-bar>
+        </div>
+    </div>
+
+    <div class="table__controls">
+        <mat-form-field>
+            <mat-label>{{selectName}}</mat-label>
+            <mat-select [formControl]="select" (selectionChange)="setFiltration()">
+                <mat-option *ngFor="let option of options" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <app-goods-table [goodsList]="goodsList" [filter]="filter"></app-goods-table>
+
+    <ng-template #errorIndicator>
+        <div *ngIf="isError$ | async" class="indicator__container">
+            <p class="indicator__error-message">{{errorMessage}}</p>
+        </div>
+    </ng-template>
+
+    <div class="table__controls">
+        <button mat-flat-button color="primary" class="goods__add-button" (click)="addToCart()">В корзину</button>
+    </div>
+
+</mat-card>

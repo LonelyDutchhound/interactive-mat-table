@@ -1,0 +1,33 @@
+.table {
+
+    &__sheet {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    &__header {
+        font-size: 1.2em;
+    }
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.mat-column-checkbox,
+.mat-column-group {
+   text-align: center;
+}
+
+.mat-column-checkbox,
+.mat-column-price {
+    min-width: 80px;
+}
+
+.mat-column-group {
+    min-width: 140px;
+}
+
+.mat-column-name {
+    min-width: 468px;
+}
