@@ -2,6 +2,7 @@
 
 [Angular CLI](https://github.com/angular/angular-cli) version 9.1.2.
 Запуск и автоматическое открытие в браузере на `http://localhost:4200/`: `npm start`.
+Посмотреть в ghpages: `https://lonelydutchhound.github.io/interactive-mat-table/`. 
 
 ## Описание задания
 
