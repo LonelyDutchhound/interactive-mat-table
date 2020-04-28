@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  OnDestroy, 
+  ChangeDetectionStrategy, 
+  ChangeDetectorRef, Output, 
+  EventEmitter } from '@angular/core';
 import { GetGoodsService } from 'src/app/services/get-goods.service';
 import { Subscription, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -79,4 +85,11 @@ export class GoodsTableContainerComponent implements OnInit, OnDestroy {
     }
   }
 
+  addToSelection(item: GoodsItem) {
+    this.cartService.addToSelection(item);
+  }
+
+  removeFromSelection(item: GoodsItem) {
+    this.cartService.removeFromSelection(item);
+  }
 }

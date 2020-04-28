@@ -17,7 +17,10 @@
         </mat-form-field>
     </div>
 
-    <app-goods-table [goodsList]="goodsList" [filter]="filter"></app-goods-table>
+    <app-goods-table [goodsList]="goodsList" 
+                     [filter]="filter"
+                     (onAddToSelection)="addToSelection($event)"
+                     (onRemoveFromSelection)="removeFromSelection($event)"></app-goods-table>
 
     <ng-template #errorIndicator>
         <div *ngIf="isError$ | async" class="indicator__container">

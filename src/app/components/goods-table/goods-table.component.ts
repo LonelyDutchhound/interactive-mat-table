@@ -1,9 +1,17 @@
-import {Component, OnInit, ViewChild, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {
+  Component, 
+  OnInit, 
+  ViewChild, 
+  Input, 
+  Output,
+  ChangeDetectionStrategy, 
+  EventEmitter,
+  ChangeDetectorRef
+} from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { GoodsItem } from 'src/app/domain/interfaces/good.interface';
 import { CURRENCY } from 'src/app/domain/constants/constants';
-import { CartService } from 'src/app/services/cart.service';
 import { TableColumnNames } from 'src/app/domain/enums/table-column-names';
 
 @Component({
@@ -51,10 +59,12 @@ export class GoodsTableComponent implements OnInit {
     return this._filterValue;
   }
 
+  @Output() onAddToSelection: EventEmitter<GoodsItem> = new EventEmitter<GoodsItem>();
+  @Output() onRemoveFromSelection: EventEmitter<GoodsItem> = new EventEmitter<GoodsItem>();
+
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private cartService: CartService,
-              private cdRef: ChangeDetectorRef) { }
+  constructor(private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
@@ -65,7 +75,7 @@ export class GoodsTableComponent implements OnInit {
 
   toggleSelectionOne($event) {
     const selectedItem = this.goodsList.filter(good => good.id === $event.source.id)[0];
-    $event.checked ? this.cartService.addToSelection(selectedItem) : this.cartService.removeFromSelection(selectedItem);
+    $event.checked ? this.onAddToSelection.emit(selectedItem) : this.onRemoveFromSelection.emit(selectedItem);
   }
 
 }
