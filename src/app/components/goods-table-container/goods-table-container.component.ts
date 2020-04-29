@@ -7,7 +7,7 @@ import {
   EventEmitter } from '@angular/core';
 import { GetGoodsService } from 'src/app/services/get-goods.service';
 import { Subscription, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { GoodsItem } from 'src/app/domain/interfaces/good.interface';
 import { FormControl } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
@@ -76,12 +76,12 @@ export class GoodsTableContainerComponent implements OnInit, OnDestroy {
 
   addToCart() {
     if (this.goodsList) {
-      const subscription = this.cartService.selectedGoods$.pipe(
+      this.cartService.selectedGoods$.pipe(
+        take(1),
         map(selectedItems => {
           this.goodsList = this.goodsList.filter(good => selectedItems.indexOf(good) === -1);
         })
       ).subscribe();
-      subscription.unsubscribe();
     }
   }
 
